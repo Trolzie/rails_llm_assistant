@@ -1,0 +1,14 @@
+<%= link_to "Back", conversations_path, class: "text-blue-500 hover:text-blue-700 mr-4" %>
+<%= @conversation.title %>
+  <% @messages.each do |message| %>
+		<%= message.role.titleize %>
+		<%= message.content %>
+  <% end %>
+	<%= form_with(model: [@conversation, @message], class: "mt-6") do |form| %>
+		<%= form.text_area :content, rows: 2, class: "shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md", placeholder: "Type your message...", required: true %>
+		<%= form.submit "Send", class: "ml-3 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+	<% end %>
+
+  // Scroll to bottom of messages container
+  const messagesContainer = document.getElementById('messages-container');
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
